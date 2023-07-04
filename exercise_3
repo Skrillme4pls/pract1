@@ -1,0 +1,26 @@
+#include <stdio.h>
+
+int countNumbers(int r, int prevDigit, int count) {
+    if (r == 0) {
+        return count;
+    }
+
+    int totalCount = 0;
+    for (int digit = 5; digit <= 9; digit += 4) {
+        if (digit != prevDigit) {
+            totalCount += countNumbers(r - 1, digit, count + 1);
+        }
+    }
+    return totalCount;
+}
+
+int main() {
+    int r;
+    printf("Enter counts of discharge (p): ");
+    scanf("%d", &r);
+
+    int result = countNumbers(r, -1, 0);
+    printf("Count of numbers of %d discharge: %d\n", r, result);
+
+    return 0;
+}
