@@ -1,40 +1,19 @@
 #include <stdio.h>
 
-// Функція для знаходження НСД (Найбільший спільний дільник)
-int findGCD(int a, int b) {
-    while (b != 0) {
-        int temp = b;
-        b = a % b;
-        a = temp;
-    }
-    return a;
-}
-
-// Функція для знаходження НСК (Найменше спільне кратне)
-int findLCM(int a, int b) {
-    return (a * b) / findGCD(a, b);
-}
-
 int main() {
-    int p;
-    int numbers[20];
+    int t1, t2, t3;
+    double total_time;
 
-    // Зчитуємо кількість чисел
-    scanf("%d", &p);
+    // Зчитуємо вхідні дані
+    printf("Enter time for the men:\n");
+    scanf("%d %d %d", &t1, &t2, &t3);
 
-    // Зчитуємо натуральні числа
-    for (int i = 0; i < p; i++) {
-        scanf("%d", &numbers[i]);
-    }
-
-    // Знаходимо НСК для заданих чисел
-    int lcm = numbers[0];
-    for (int i = 1; i < p; i++) {
-        lcm = findLCM(lcm, numbers[i]);
-    }
+    // Обчислюємо загальний час
+    total_time = (double)((t1 + t2 + t3)/3);
 
     // Виводимо результат
-    printf("%d\n", lcm);
+    printf("%.2f hours\n", total_time );
 
     return 0;
 }
+
