@@ -1,26 +1,40 @@
+// Підключення бібліотек
 #include <stdio.h>
+#include <windows.h>
 
-int countNumbers(int r, int prevDigit, int count) {
+int countNumbers(int r, int pd, int ppd) {
     if (r == 0) {
-        return count;
+        // Досягнуто кінця розрядів, повертаємо 1, щоб позначити успішне формування числа
+        return 1;
     }
 
-    int totalCount = 0;
-    for (int digit = 5; digit <= 9; digit += 4) {
-        if (digit != prevDigit) {
-            totalCount += countNumbers(r - 1, digit, count + 1);
+    int count = 0;
+    int i;
+
+    for (i = 5; i <= 9; i += 4) {
+        if (i != pd || i != ppd) {
+            // Викликаємо рекурсивно для наступного розряду
+            count += countNumbers(r - 1, i, pd);
         }
     }
-    return totalCount;
+
+    return count;
 }
 
 int main() {
+    // Зміна кодування консолі на UTF-8
+    SetConsoleCP(65001);
+    SetConsoleOutputCP(65001);
+
+    // Створення змінної для кількості розрядів та отримання даних від користувача
     int r;
-    printf("Enter counts of discharge (p): ");
+    printf("Введіть кількість розрядів (р ≤ 30):");
     scanf("%d", &r);
 
-    int result = countNumbers(r, -1, 0);
-    printf("Count of numbers of %d discharge: %d\n", r, result);
+    // Викликаємо функцію для обрахунку кількості розрядів
+    int result = countNumbers(r, 0, 0);
+
+    printf("Кількість чисел із %d розрядів: %d\n", r, result);
 
     return 0;
 }
